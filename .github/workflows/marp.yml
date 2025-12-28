@@ -16,10 +16,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Build slides
-        uses: docker://marpteam/marp-cli:latest
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          args: --html test-slides.md -o index.html
+          node-version: '20'
+
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+
+      - name: Build slides
+        run: marp --html test-slides.md -o index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
