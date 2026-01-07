@@ -3,6 +3,7 @@ marp: true
 theme: default
 paginate: true
 header: 'Python 시큐어코딩'
+footer: '대외비 - 내부 교육자료'
 style: |
   section {
     font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
@@ -248,19 +249,26 @@ bandit --version && safety --version
 
 # 01. 개발 단계별 취약점 수정 비용
 
-```
-비용
-  ↑
-  │                                          ████████ $100,000+
-  │                                          ████████ 운영
-  │                          ████████████████
-  │                          ████████████████ $15,000
-  │                          테스트
-  │          ████████████████
-  │          $5,000 개발
-  │  ████████
-  │  $1,000 설계
-  └─────────────────────────────────────────────────────→ 단계
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px' }}}%%
+flowchart TB
+    subgraph Chart[" "]
+        direction TB
+        L4["운영<br/>$100,000+"]
+        L3["테스트<br/>$15,000"]
+        L2["개발<br/>$5,000"]
+        L1["설계<br/>$1,000"]
+        
+        L1 -.-> L2
+        L2 -.-> L3
+        L3 -.-> L4
+    end
+    
+    style L1 fill:#F0FFF0,stroke:#4CAF50,stroke-width:3px
+    style L2 fill:#FFF8E7,stroke:#FFA726,stroke-width:4px
+    style L3 fill:#FFF0F5,stroke:#EF5350,stroke-width:5px
+    style L4 fill:#FFCDD2,stroke:#D32F2F,stroke-width:6px
+    style Chart fill:#FFFFFF
 ```
 
 > 결론: 취약점은 **발견 시점이 빠를수록** 수정 비용이 낮아진다
@@ -322,13 +330,51 @@ Apache Struts 프레임워크 취약점 + SQL Injection
 
 # 01. 보안 SDLC 개요
 
-```
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│ 요구사항 │ → │   설계   │ → │   구현   │ → │  테스트  │ → │   배포   │
-└──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-      ↓             ↓              ↓              ↓              ↓
-   보안요구       위협          시큐어         보안           보안
-   사항분석      모델링          코딩         테스트         모니터링
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px' }}}%%
+flowchart LR
+    subgraph Phase1[" "]
+        direction TB
+        R[요구사항]
+        R1[보안요구<br/>사항분석]
+        R --> R1
+    end
+    
+    subgraph Phase2[" "]
+        direction TB
+        D[설계]
+        D1[위협<br/>모델링]
+        D --> D1
+    end
+    
+    subgraph Phase3[" "]
+        direction TB
+        I[구현]
+        I1[시큐어<br/>코딩]
+        I --> I1
+    end
+    
+    subgraph Phase4[" "]
+        direction TB
+        T[테스트]
+        T1[보안<br/>테스트]
+        T --> T1
+    end
+    
+    subgraph Phase5[" "]
+        direction TB
+        P[배포]
+        P1[보안<br/>모니터링]
+        P --> P1
+    end
+    
+    Phase1 --> Phase2 --> Phase3 --> Phase4 --> Phase5
+    
+    style Phase1 fill:#FFF8E7
+    style Phase2 fill:#E8F4FD
+    style Phase3 fill:#F0FFF0
+    style Phase4 fill:#FFF0F5
+    style Phase5 fill:#F5F0FF
 ```
 
 ### 단계별 보안 활동
