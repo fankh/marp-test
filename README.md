@@ -6,6 +6,12 @@
 |--------|-------------|------|
 | Python Secure Coding | Python 웹 애플리케이션 보안 개발 실습 과정 (12차시, 740분) | [View Slides](https://fankh.github.io/marp-files/) |
 
+## Available Scripts
+
+| Script | Description | File |
+|--------|-------------|------|
+| 강의 스크립트 | 슬라이드별 한국어 강의 스크립트 (강사용) | [python-secure-coding-script.md](./python-secure-coding-script.md) |
+
 ## Slides Content
 
 ### Python Secure Coding (Python 시큐어코딩)
